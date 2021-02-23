@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Node from './Node';
+import Astar from './algorithms/Astar';
 import './styles/Pathfinder.css';
 
 const cols = 35;
@@ -26,6 +27,10 @@ const Pathfinder = () => {
     createSpot(grid);
     setGrid(grid);
     addNeighbours(grid);
+    
+    const startNode = grid[NODE_START_ROW][NODE_START_COL];
+    const endNode = grid[NODE_END_ROW][NODE_END_COL];
+    Astar(startNode, endNode)
   };
 
   const createSpot = (grid) => {
@@ -45,7 +50,7 @@ const Pathfinder = () => {
     this.isStart = this.x === NODE_START_ROW && this.y === NODE_START_COL;
     this.isEnd = this.x === NODE_END_ROW && this.y === NODE_END_COL;
     this.neighbours = [];
-    this.previous = 0;
+    this.previous = undefined;
     this.addneighbours = function(grid){
       let i = this.x;
       let j = this.y;
