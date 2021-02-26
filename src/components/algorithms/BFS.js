@@ -4,7 +4,7 @@ function BFS (grid, startNode, endNode){
   while (nextNodesStack.length) {
     const currentNode = nextNodesStack.shift();
     if (currentNode === endNode) {
-      console.log("Found")
+      console.log("Found!");
       return visitedNodesInOrder;
     }
 

@@ -1,11 +1,12 @@
-function DFS(grid, startNode, finishNode) {
+function DFS(grid, startNode, endNode) {
   const visitedNodesInOrder = [];
   const nextNodesStack = [];
   nextNodesStack.push(startNode);
   while (nextNodesStack.length) {
     const currentNode = nextNodesStack.pop();
 
-    if (currentNode === finishNode) {
+    if (currentNode === endNode) {
+      console.log("Found!");
       return visitedNodesInOrder;
     }
 
