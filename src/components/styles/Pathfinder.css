@@ -1,8 +1,11 @@
-.Wrapper{
-  width: 90%;
-  margin: auto;
+.grid-container {
+  margin: 10% auto;
 }
 
-.rowWrapper{
-  display: flex;
+.grid {
+  white-space: pre;
+}
+
+button {
+  margin: 2px;
 }

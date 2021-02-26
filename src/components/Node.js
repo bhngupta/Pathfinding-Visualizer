@@ -1,14 +1,35 @@
-import React from 'react';
+import React, {Component} from 'react';
+
 import './styles/Node.css';
 
-const Node = ({ isStart, isEnd, row, col }) => {
-  const classes = isStart ? "node-start" : isEnd ? "node-end" : "";
-  return(
-    <div 
-      className={`node ${classes}`} 
-      id={`noce-${row}-${col}`}>
-    </div>
-  );
-};
+export default class Node extends Component {
+  render() {
+    const {
+      col,
+      isFinish,
+      isStart,
+      isWall,
+      onMouseDown,
+      onMouseEnter,
+      onMouseUp,
+      row,
+    } = this.props;
+    
+    const extraClassName = isFinish
+      ? 'node-finish'
+      : isStart
+      ? 'node-start'
+      : isWall
+      ? 'node-wall'
+      : '';
 
-export default Node;
+    return (
+      <td
+        id={`node-${row}-${col}`}
+        className={`node ${extraClassName}`}
+        onMouseDown={() => onMouseDown(row, col)}
+        onMouseEnter={() => onMouseEnter(row, col)}
+        onMouseUp={() => onMouseUp()}></td>
+    );
+  }
+}
