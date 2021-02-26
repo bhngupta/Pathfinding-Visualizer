@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+
 import Node from './Node';
+
 import bfs from './algorithms/BFS';
+import dfs from './algorithms/DFS';
+
 import './styles/Pathfinder.css';
 
 class Pathfinder extends Component {
@@ -327,7 +331,7 @@ class Pathfinder extends Component {
           visitedNodesInOrder = bfs(grid, startNode, finishNode);
           break;
         case 'DFS':
-          //visitedNodesInOrder = dfs(grid, startNode, finishNode);
+          visitedNodesInOrder = dfs(grid, startNode, finishNode);
           break;
         default:
           // should never get here
