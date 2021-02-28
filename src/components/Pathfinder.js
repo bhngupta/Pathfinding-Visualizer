@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
-import Node from './Node';
-
 import astar from './algorithms/Astar';
 import bfs from './algorithms/BFS';
-import dijkstra from './algorithms/Dijkstra';
 import dfs from './algorithms/DFS';
+import dijkstra from './algorithms/Dijkstra';
+import Node from './Node';
 
-import './styles/Pathfinder.css';
+import './styles/Pathfinder.css';  
 
 class Pathfinder extends Component {
   constructor() {
@@ -397,41 +396,9 @@ class Pathfinder extends Component {
   render() {
     const {grid, mouseIsPressed} = this.state;
     return (
-      <div>
+      <div className="root">
+       
         <h2>Pathfinder</h2>
-
-        <table
-          className="grid-container"
-          onMouseLeave={() => this.handleMouseLeave()}>
-          <tbody className="grid">
-            {grid.map((row, rowIdx) => {
-              return (
-                <tr key={rowIdx}>
-                  {row.map((node, nodeIdx) => {
-                    const {row, col, isFinish, isStart, isWall} = node;
-                    return (
-                      <Node
-                        key={nodeIdx}
-                        col={col}
-                        isFinish={isFinish}
-                        isStart={isStart}
-                        isWall={isWall}
-                        mouseIsPressed={mouseIsPressed}
-                        onMouseDown={(row, col) =>
-                          this.handleMouseDown(row, col)
-                        }
-                        onMouseEnter={(row, col) =>
-                          this.handleMouseEnter(row, col)
-                        }
-                        onMouseUp={() => this.handleMouseUp(row, col)}
-                        row={row}></Node>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
         <button
           type="button"
           className="btn btn-danger"
@@ -482,7 +449,40 @@ class Pathfinder extends Component {
             onClick={() => this.toggleView()}>
             Desktop View
           </button>
-        )}
+          )}
+        <table
+          className="grid-container"
+          onMouseLeave={() => this.handleMouseLeave()}>
+          <tbody className="grid">
+            {grid.map((row, rowIdx) => {
+              return (
+                <tr key={rowIdx}>
+                  {row.map((node, nodeIdx) => {
+                    const {row, col, isFinish, isStart, isWall} = node;
+                    return (
+                      <Node
+                        key={nodeIdx}
+                        col={col}
+                        isFinish={isFinish}
+                        isStart={isStart}
+                        isWall={isWall}
+                        mouseIsPressed={mouseIsPressed}
+                        onMouseDown={(row, col) =>
+                          this.handleMouseDown(row, col)
+                        }
+                        onMouseEnter={(row, col) =>
+                          this.handleMouseEnter(row, col)
+                        }
+                        onMouseUp={() => this.handleMouseUp(row, col)}
+                        row={row}></Node>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        
       </div>
     );
   }
@@ -490,7 +490,7 @@ class Pathfinder extends Component {
 
 /******************** Create Walls ********************/
 const getNewGridWithWallToggled = (grid, row, col) => {
-  // mouseDown starts to act strange if I don't make newGrid and work off of grid instead.
+  
   const newGrid = grid.slice();
   const node = newGrid[row][col];
   if (!node.isStart && !node.isFinish && node.isNode) {
@@ -503,8 +503,7 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   return newGrid;
 };
 
-// Backtracks from the finishNode to find the shortest path.
-// Only works when called after the pathfinding methods.
+
 function getNodesInShortestPathOrder(finishNode) {
   const nodesInShortestPathOrder = [];
   let currentNode = finishNode;
