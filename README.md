@@ -1,1 +1,1 @@
-Pathfinding Visualiser in React 
+Pathfinding Visualiser in React JS
