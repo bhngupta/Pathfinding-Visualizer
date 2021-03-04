@@ -6,7 +6,18 @@ import dfs from './algorithms/DFS';
 import dijkstra from './algorithms/Dijkstra';
 import Node from './Node';
 
-import './styles/Pathfinder.css';  
+import { AppBar, Button , Box, Typography } from '@material-ui/core'
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+import './styles/Pathfinder.css';
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Maven Pro',
+      'sans-serif',
+    ].join(','),
+  },});
 
 class Pathfinder extends Component {
   constructor() {
@@ -397,59 +408,65 @@ class Pathfinder extends Component {
     const {grid, mouseIsPressed} = this.state;
     return (
       <div className="root">
-       
-        <h2>Pathfinder</h2>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => this.clearGrid()}>
-          Clear Grid
-        </button>
-        <button
-          type="button"
-          className="btn btn-warning"
-          onClick={() => this.clearWalls()}>
-          Clear Walls
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => this.visualize('Dijkstra')}>
-          Dijkstra's
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => this.visualize('AStar')}>
-          A*
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => this.visualize('BFS')}>
-          Bread First Search
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => this.visualize('DFS')}>
-          Depth First Search
-        </button>
-        {this.state.isDesktopView ? (
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={() => this.toggleView()}>
-            Mobile View
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="btn btn-dark"
-            onClick={() => this.toggleView()}>
-            Desktop View
-          </button>
-          )}
+        <AppBar position="static">
+          <Box my={1}>
+          <ThemeProvider theme={theme}>
+            <Typography variant="h4" color="inherit">
+              Pathfinding Visualizer
+            </Typography>
+            </ThemeProvider>
+          </Box>
+        </AppBar>
+        <Box my={2}> 
+          <Box component="span" mx={1}>
+            <Button
+              type="button"
+              variant="contained" color="primary"
+              onClick={() => this.clearGrid()}>
+              Clear Grid
+            </Button>
+          </Box>
+          <Box component="span" mx={1}>
+            <Button
+              type="button"
+              variant="contained" color="primary"
+              onClick={() => this.clearWalls()}>
+              Clear Walls
+            </Button>
+          </Box>
+          <Box component="span" mx={1}>
+            <Button
+              type="button"
+              variant="contained" color="primary"
+              onClick={() => this.visualize('Dijkstra')}>
+              Dijkstra's
+            </Button>
+          </Box>
+          <Box component="span" mx={1}>
+            <Button
+              type="button"
+              variant="contained" color="primary"
+              onClick={() => this.visualize('AStar')}>
+              A*
+            </Button>
+          </Box>
+          <Box component="span" mx={1}>
+            <Button
+              type="button"
+              variant="contained" color="primary"
+              onClick={() => this.visualize('BFS')}>
+              Bread First Search
+            </Button>
+          </Box>
+          <Box component="span" mx={1}>
+            <Button
+              type="button"
+              variant="contained" color="primary"
+              onClick={() => this.visualize('DFS')}>
+              Depth First Search
+            </Button>
+          </Box>
+        </Box>
         <table
           className="grid-container"
           onMouseLeave={() => this.handleMouseLeave()}>
