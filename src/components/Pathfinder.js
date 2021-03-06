@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 
 import astar from './algorithms/Astar';
 import bfs from './algorithms/BFS';
@@ -24,13 +24,13 @@ class Pathfinder extends Component {
     super();
     this.state = {
       grid: [],
-      START_NODE_ROW: 5,
-      FINISH_NODE_ROW: 5,
-      START_NODE_COL: 5,
-      FINISH_NODE_COL: 15,
+      START_NODE_ROW: 6,
+      FINISH_NODE_ROW: 6,
+      START_NODE_COL: 15,
+      FINISH_NODE_COL: 35,
       mouseIsPressed: false,
-      ROW_COUNT: 15,
-      COLUMN_COUNT: 35,
+      ROW_COUNT: 30,
+      COLUMN_COUNT: 70,
       MOBILE_ROW_COUNT: 10,
       MOBILE_COLUMN_COUNT: 20,
       isRunning: false,
