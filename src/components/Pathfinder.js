@@ -56,35 +56,8 @@ class Pathfinder extends Component {
     this.setState({isRunning: !this.state.isRunning});
   }
 
-  toggleView() {
-    if (!this.state.isRunning) {
-      this.clearGrid();
-      this.clearWalls();
-      const isDesktopView = !this.state.isDesktopView;
-      let grid;
-      if (isDesktopView) {
-        grid = this.getInitialGrid(
-          this.state.ROW_COUNT,
-          this.state.COLUMN_COUNT,
-        );
-        this.setState({isDesktopView, grid});
-      } else {
-        if (
-          this.state.START_NODE_ROW > this.state.MOBILE_ROW_COUNT ||
-          this.state.FINISH_NODE_ROW > this.state.MOBILE_ROW_COUNT ||
-          this.state.START_NODE_COL > this.state.MOBILE_COLUMN_COUNT ||
-          this.state.FINISH_NODE_COL > this.state.MOBILE_COLUMN_COUNT
-        ) {
-          alert('Start & Finish Nodes Must Be within 10 Rows x 20 Columns');
-        } else {
-          grid = this.getInitialGrid(
-            this.state.MOBILE_ROW_COUNT,
-            this.state.MOBILE_COLUMN_COUNT,
-          );
-          this.setState({isDesktopView, grid});
-        }
-      }
-    }
+  findScreensize() {
+    
   }
 
   /******************** Set up the initial grid ********************/
