@@ -57,7 +57,17 @@ class Pathfinder extends Component {
   }
 
   findScreensize() {
-    
+    const [windowDimensions] = getWindowDimensions();
+    console.log(windowDimensions);
+    return windowDimensions;
+  }
+
+  getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+      width,
+      height
+    };
   }
 
   /******************** Set up the initial grid ********************/
@@ -379,6 +389,7 @@ class Pathfinder extends Component {
 
   render() {
     const {grid, mouseIsPressed} = this.state;
+    
     return (
       <div className="root">
         <AppBar position="static">
@@ -493,6 +504,13 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   return newGrid;
 };
 
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
 
 function getNodesInShortestPathOrder(finishNode) {
   const nodesInShortestPathOrder = [];
