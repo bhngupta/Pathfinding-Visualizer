@@ -6,7 +6,7 @@ import dfs from './algorithms/DFS';
 import dijkstra from './algorithms/Dijkstra';
 import Node from './Node';
 
-import { AppBar, Button , Box, Typography } from '@material-ui/core'
+import { AppBar, Button , Box, Typography, Container } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import './styles/Pathfinder.css';
@@ -24,13 +24,13 @@ class Pathfinder extends Component {
     super();
     this.state = {
       grid: [],
-      START_NODE_ROW: 6,
-      FINISH_NODE_ROW: 6,
-      START_NODE_COL: 15,
-      FINISH_NODE_COL: 35,
+      START_NODE_ROW: 0,
+      FINISH_NODE_ROW: parseInt(window.innerWidth/65) - 1,
+      START_NODE_COL: 0,
+      FINISH_NODE_COL: parseInt(window.innerHeight/18) - 1,
       mouseIsPressed: false,
-      ROW_COUNT: 30,
-      COLUMN_COUNT: 70,
+      ROW_COUNT: parseInt(window.innerWidth/65),
+      COLUMN_COUNT: parseInt(window.innerHeight/18),
       MOBILE_ROW_COUNT: 10,
       MOBILE_COLUMN_COUNT: 20,
       isRunning: false,
@@ -45,6 +45,8 @@ class Pathfinder extends Component {
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.toggleIsRunning = this.toggleIsRunning.bind(this);
+    console.log(window.innerWidth); //1440 
+    console.log(window.innerHeight); //825
   }
 
   componentDidMount() {
@@ -57,18 +59,9 @@ class Pathfinder extends Component {
   }
 
   findScreensize() {
-    const [windowDimensions] = getWindowDimensions();
-    console.log(windowDimensions);
-    return windowDimensions;
+    
   }
 
-  getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-      width,
-      height
-    };
-  }
 
   /******************** Set up the initial grid ********************/
   getInitialGrid = (
@@ -402,7 +395,7 @@ class Pathfinder extends Component {
           </Box>
         </AppBar>
         <Box my={2}> 
-          <Box component="span" mx={1}>
+          <Box component="span" m={1}>
             <Button
               type="button"
               variant="contained" color="primary"
@@ -410,7 +403,7 @@ class Pathfinder extends Component {
               Clear Grid
             </Button>
           </Box>
-          <Box component="span" mx={1}>
+          <Box component="span" m={1}>
             <Button
               type="button"
               variant="contained" color="primary"
@@ -418,7 +411,7 @@ class Pathfinder extends Component {
               Clear Walls
             </Button>
           </Box>
-          <Box component="span" mx={1}>
+          <Box component="span" m={1}>
             <Button
               type="button"
               variant="contained" color="primary"
@@ -426,7 +419,7 @@ class Pathfinder extends Component {
               Dijkstra's
             </Button>
           </Box>
-          <Box component="span" mx={1}>
+          <Box component="span" m={1}>
             <Button
               type="button"
               variant="contained" color="primary"
@@ -434,7 +427,7 @@ class Pathfinder extends Component {
               A*
             </Button>
           </Box>
-          <Box component="span" mx={1}>
+          <Box component="span" m={1}>
             <Button
               type="button"
               variant="contained" color="primary"
@@ -442,7 +435,7 @@ class Pathfinder extends Component {
               Bread First Search
             </Button>
           </Box>
-          <Box component="span" mx={1}>
+          <Box component="span" m={1}>
             <Button
               type="button"
               variant="contained" color="primary"
@@ -451,7 +444,9 @@ class Pathfinder extends Component {
             </Button>
           </Box>
         </Box>
-        <table
+        <Box>
+          <Container>
+          <table
           className="grid-container"
           onMouseLeave={() => this.handleMouseLeave()}>
           <tbody className="grid">
@@ -483,6 +478,8 @@ class Pathfinder extends Component {
             })}
           </tbody>
         </table>
+          </Container>
+        </Box>
         
       </div>
     );
@@ -503,14 +500,6 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   }
   return newGrid;
 };
-
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height
-  };
-}
 
 function getNodesInShortestPathOrder(finishNode) {
   const nodesInShortestPathOrder = [];
