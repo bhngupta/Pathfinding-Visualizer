@@ -24,13 +24,15 @@ class Pathfinder extends Component {
     super();
     this.state = {
       grid: [],
-      START_NODE_ROW: 0,
-      FINISH_NODE_ROW: parseInt(window.innerWidth/65) - 1,
-      START_NODE_COL: 0,
-      FINISH_NODE_COL: parseInt(window.innerHeight/18) - 1,
+      width: window.innerWidth,
+      height: window.innerHeight,
+      START_NODE_ROW: parseInt(window.innerHeight/30*1/2),
+      START_NODE_COL: parseInt(window.innerWidth/25*1/4),
+      FINISH_NODE_ROW: parseInt(window.innerHeight/30*1/2),
+      FINISH_NODE_COL: parseInt(window.innerWidth/25*3/4),
       mouseIsPressed: false,
-      ROW_COUNT: parseInt(window.innerWidth/65),
-      COLUMN_COUNT: parseInt(window.innerHeight/18),
+      ROW_COUNT: parseInt(window.innerHeight/31),
+      COLUMN_COUNT: parseInt(window.innerWidth/26),
       MOBILE_ROW_COUNT: 10,
       MOBILE_COLUMN_COUNT: 20,
       isRunning: false,
@@ -45,21 +47,38 @@ class Pathfinder extends Component {
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.toggleIsRunning = this.toggleIsRunning.bind(this);
-    console.log(window.innerWidth); //1440 
-    console.log(window.innerHeight); //825
+    console.log("screen size => "+window.innerWidth + "*" + window.innerHeight); 
   }
 
   componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions.bind(this));
     const grid = this.getInitialGrid();
     this.setState({grid});
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions.bind(this));
   }
 
   toggleIsRunning() {
     this.setState({isRunning: !this.state.isRunning});
   }
 
-  findScreensize() {
-    
+  updateDimensions() {
+    if(window.innerWidth != this.state.width || window.innerHeight != this.state.height) {
+      this.setState({ 
+        ROW_COUNT: parseInt(window.innerHeight/31),
+        COLUMN_COUNT: parseInt(window.innerWidth/26),
+        START_NODE_ROW: parseInt(window.innerHeight/30*1/2),
+        START_NODE_COL: parseInt(window.innerWidth/25*1/4),
+        FINISH_NODE_ROW: parseInt(window.innerHeight/30*1/2),
+        FINISH_NODE_COL: parseInt(window.innerWidth/25*3/4),
+        });
+      //console.log("screen resized => "+ window.innerWidth + "*" + window.innerHeight);
+      const grid = this.getInitialGrid();
+      this.setState({grid});
+    }
   }
 
 
@@ -445,7 +464,7 @@ class Pathfinder extends Component {
           </Box>
         </Box>
         <Box>
-          <Container>
+          
           <table
           className="grid-container"
           onMouseLeave={() => this.handleMouseLeave()}>
@@ -478,7 +497,7 @@ class Pathfinder extends Component {
             })}
           </tbody>
         </table>
-          </Container>
+          
         </Box>
         
       </div>
