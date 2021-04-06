@@ -1,6 +1,8 @@
 # Pathfinding Visualiser
 
 ![Generic badge](https://img.shields.io/badge/Status-In--Dev-blue.svg)
+![codecov](https://codecov.io/gh/Bhanu-mbvg/pathfinder/branch/main/graph/badge.svg?token=HBB8K3QKE4)
+
 [Webapp Link](https://bhanu-mbvg.github.io/pathfinder/)
 
 Pathfinding Visualizer created using [React.JS](https://reactjs.org/) and [React-Bootstrap](https://react-bootstrap.github.io/) to viualize searhing algorithms between 2 nodes in an interactive canvas.
