@@ -1,4 +1,4 @@
-# Pathfinding Visualiser
+# Pathfinding Visualizer
 
 ![Generic badge](https://img.shields.io/badge/Status-In--Dev-blue.svg)
 ![codecov](https://codecov.io/gh/Bhanu-mbvg/pathfinder/branch/main/graph/badge.svg?token=HBB8K3QKE4)
